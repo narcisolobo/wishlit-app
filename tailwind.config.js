@@ -5,14 +5,34 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        primary: generateScale('violet'),
+        secondary: generateScale('mauve'),
+        danger: generateScale('crimson'),
+      },
+      fontFamily: {
+        sans: 'var(--font-open-sans)',
+        serif: 'var(--font-bitter)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
+};
+
+function generateScale(name) {
+  let scale = Array.from({ length: 12 }, (_, i) => {
+    let id = i + 1;
+    return [
+      [id, `var(--${name}${12 - i})`],
+      [`a${id}`, `var(--${name}A${id})`],
+    ];
+  }).flat();
+
+  return Object.fromEntries(scale);
 }
