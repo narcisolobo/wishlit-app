@@ -7,8 +7,8 @@ function Hero() {
     <section id="hero" className="grid place-content-center p-20">
       <div className="flex items-center justify-center gap-2">
         <div className="text-center sm:text-left">
-          <h1 className="mb-2 font-serif text-5xl font-semibold md:text-6xl">
-            Wishlit.
+          <h1 className="mb-2 font-serif text-5xl font-semibold tracking-wide md:text-6xl">
+            Wish-lit.
           </h1>
           <h2 className="mb-6 text-3xl">Find your next literary obsession.</h2>
           <div className="flex justify-center gap-3 sm:justify-start">

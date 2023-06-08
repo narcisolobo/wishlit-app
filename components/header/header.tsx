@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ThemeSwitcher from './theme-switcher';
+import SignedIn from './signed-in';
 
 function Header() {
   return (
@@ -9,9 +10,14 @@ function Header() {
       <Link
         href="/"
         className="rounded focus:outline-none focus-visible:ring focus-visible:ring-primary-3 focus-visible:ring-offset-4 focus-visible:ring-offset-inherit">
-        <h2 className="font-serif text-3xl font-semibold">Wishlit</h2>
+        <h2 className="font-serif text-3xl font-semibold tracking-wide">
+          Wish-lit
+        </h2>
       </Link>
-      <ThemeSwitcher />
+      <div className="flex items-center gap-2">
+        <SignedIn />
+        <ThemeSwitcher />
+      </div>
     </header>
   );
 }
