@@ -20,7 +20,7 @@ function ThemeSwitcher() {
       id="theme-toggle"
       onClick={handleSwitchTheme}
       aria-roledescription="Toggle dark mode"
-      className="rounded p-3 text-current transition-colors hover:bg-secondary-9 focus:outline-none focus-visible:ring focus-visible:ring-primary-3 dark:hover:bg-slate-700">
+      className="focus-visible:ring-primary-3 rounded p-3 text-current transition-colors hover:bg-offbrand-9 focus:outline-none focus-visible:ring dark:hover:bg-slate-700">
       <FaRegMoon
         id="theme-toggle-dark-icon"
         className="block h-5 w-5 dark:hidden"

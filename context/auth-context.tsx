@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import {
   Session,
   SupabaseClient,
@@ -8,12 +8,14 @@ import {
 } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import { Database } from '@/supabase/database.types';
+import { authReducer, type User, type AuthAction } from './auth-reducer';
 
 type MaybeSession = Session | null;
 
 type SupabaseContext = {
   supabase: SupabaseClient<Database, 'public'>;
-  session: MaybeSession;
+  user: User;
+  dispatch: React.Dispatch<AuthAction>;
 };
 
 type Props = {
@@ -21,9 +23,14 @@ type Props = {
   session: MaybeSession;
 };
 
-const AuthContext = createContext<SupabaseContext | undefined>(undefined);
+const initialUser: User = null;
+
+export const AuthContext = createContext<SupabaseContext | undefined>(
+  undefined
+);
 
 export default function AuthProvider({ children, session }: Props) {
+  const [user, dispatch] = useReducer(authReducer, initialUser);
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -42,36 +49,8 @@ export default function AuthProvider({ children, session }: Props) {
   }, [router, supabase, session]);
 
   return (
-    <AuthContext.Provider value={{ supabase, session }}>
+    <AuthContext.Provider value={{ supabase, user, dispatch }}>
       {children}
     </AuthContext.Provider>
   );
 }
-
-/**
- * This is a TypeScript React hook that returns the Supabase client from the context of an
- * AuthProvider.
- * @returns The `useSupabase` function returns the Supabase client instance with the specified generic
- * types `Database` and `SchemaName`. The `Database` type represents the database schema, and the
- * `SchemaName` type represents the name of the schema to be used. The function also throws an error if
- * it is not used inside the `AuthProvider` context.
- */
-export const useSupabase = () => {
-  let context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error('useSupabase must be used inside AuthProvider');
-  }
-
-  return context.supabase as SupabaseClient<Database, 'public'>;
-};
-
-export const useSession = () => {
-  let context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error('useSession must be used inside AuthProvider');
-  }
-
-  return context.session;
-};

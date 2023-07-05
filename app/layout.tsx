@@ -33,7 +33,7 @@ async function RootLayout({ children }: Props) {
           <ThemeProvider>
             <div className="flex min-h-screen flex-col px-4 sm:container">
               <Header />
-              <main className="my-4 flex-1 rounded-xl bg-secondary-11 text-secondary-1 dark:bg-slate-800 dark:text-slate-100">
+              <main className="my-4 flex-1 rounded-xl bg-offbrand-11 text-offbrand-1 dark:bg-slate-800 dark:text-slate-100">
                 {children}
               </main>
             </div>

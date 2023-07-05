@@ -1,6 +1,6 @@
 type Props = {};
-function Dashboard({}: Props) {
-  return <div>Dashboard</div>;
+function DashboardPage({}: Props) {
+  return <div>DashboardPage</div>;
 }
 
-export default Dashboard;
+export default DashboardPage;

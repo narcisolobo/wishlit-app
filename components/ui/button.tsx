@@ -20,7 +20,7 @@ const defaultClasses = [
   'disabled:opacity-50',
 ];
 
-const buttonStyles = cva(defaultClasses, {
+const buttonClasses = cva(defaultClasses, {
   variants: {
     size: {
       sm: ['px-3', 'py-1', 'text-sm'],
@@ -29,35 +29,35 @@ const buttonStyles = cva(defaultClasses, {
     },
     variant: {
       primary: [
-        'bg-primary-3',
-        'text-secondary-11',
-        'focus-visible:ring-primary-5',
-        'hover:bg-primary-4',
+        'bg-brand-3',
+        'text-offbrand-11',
+        'focus-visible:ring-brand-5',
+        'hover:bg-brand-4',
       ],
       secondary: [
-        'bg-secondary-3',
-        'text-secondary-11',
-        'focus-visible:ring-primary-5',
-        'hover:bg-secondary-4',
+        'bg-offbrand-3',
+        'text-offbrand-11',
+        'focus-visible:ring-brand-5',
+        'hover:bg-offbrand-4',
       ],
       danger: [
-        'bg-danger-3',
-        'text-secondary-11',
-        'focus-visible:ring-danger-5',
-        'hover:bg-danger-4',
+        'bg-risk-3',
+        'text-offbrand-11',
+        'focus-visible:ring-risk-5',
+        'hover:bg-risk-4',
       ],
     },
     variety: {
       solid: [''],
       outline: [
         'border',
-        'border-primary-3',
-        'hover-border-primary-8',
+        'border-brand-3',
+        'hover-border-brand-8',
         'bg-transparent',
-        'text-primary-3',
-        'focus-visible:ring-primary-5',
-        'hover:bg-primary-3',
-        'hover:text-secondary-11',
+        'text-brand-3',
+        'focus-visible:ring-brand-5',
+        'hover:bg-brand-3',
+        'hover:text-offbrand-11',
       ],
     },
   },
@@ -70,7 +70,7 @@ const buttonStyles = cva(defaultClasses, {
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonStyles> {
+    VariantProps<typeof buttonClasses> {
   asChild?: boolean;
   children?: React.ReactNode;
 }
@@ -92,7 +92,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Component
         className={mergeClassnames(
-          buttonStyles({ className, size, variant, variety })
+          buttonClasses({ className, size, variant, variety })
         )}
         {...props}
         ref={ref}>
